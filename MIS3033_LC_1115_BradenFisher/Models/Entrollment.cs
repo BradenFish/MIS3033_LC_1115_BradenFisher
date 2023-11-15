@@ -8,12 +8,14 @@ namespace a
         [Key]
 
         public int Id { get; set; }
+
         [ForeignKey(nameof(Student))]
         public string StudentID { get; set; } 
-        public Student Student { get; set; }
+        public Student Student { get; set; }// navigation, not saved to the db
+
         [ForeignKey(nameof(Course))]
         public string CourseID { get; set; }
-        public Course Course { get; set; }
+        public Course Course { get; set; }// navigation, not mandatory
         public double Grade { get; set; }
         public char LetterGrade { get; set; } = 'H';
 
