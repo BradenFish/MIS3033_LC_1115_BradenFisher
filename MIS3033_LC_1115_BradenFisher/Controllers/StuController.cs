@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MIS3033_LC_1115_BradenFisher.Data;
+using System.Globalization;
 
 namespace MIS3033_LC_1115_BradenFisher.Controllers
 {
@@ -10,6 +11,20 @@ namespace MIS3033_LC_1115_BradenFisher.Controllers
 
         StuDB db = new StuDB();// StuDB, Complex, memberfield
 
+        public JsonResult getlg(string id)
+        {
+            var r = db.Enrollments.Where(x => x.CourseID == id).
+            GroupBy(x => x.LetterGrade).
+            Select(x => new {lg = x.Key, n = x.Count()}).
+            OrderBy(x => x.lg);
+            return Json(r);
+        }
+
+        public JsonResult getsc()
+        {
+            var r = db.Courses.Select(x => new {id = x.Id, text = $"ID:{x.Id}, Name:{x.Name}"});
+            return Json(r);
+        }
         public IActionResult Profile()
         {
             return View();
