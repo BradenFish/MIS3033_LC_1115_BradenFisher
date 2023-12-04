@@ -1,4 +1,5 @@
 ﻿using a;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MIS3033_LC_1115_BradenFisher.Data;
@@ -11,6 +12,11 @@ namespace MIS3033_LC_1115_BradenFisher.Controllers
     {
 
         StuDB db = new StuDB();
+
+        public IActionResult Home()
+        {
+            return View();
+        }
         public JsonResult DG()
         {
             //var r = db.Enrollments;
@@ -37,6 +43,8 @@ namespace MIS3033_LC_1115_BradenFisher.Controllers
         {
             return Json(db.Enrollments);
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             return View();
